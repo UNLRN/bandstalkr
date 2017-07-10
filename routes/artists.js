@@ -4,8 +4,6 @@ const request = require('request');
 const moment = require('moment');
 const async = require('async');
 
-let routecalled = 0;
-
 router.get('/:id/:artist', function (req, res) {
     console.log(req.url);
     const artist = req.params.artist;
@@ -15,8 +13,8 @@ router.get('/:id/:artist', function (req, res) {
     const client_secret = process.env.SPOTIFY_SECRET;
     const api_key = process.env.LASTFM_KEY;
 
-    let bio, events, artistName, avatar, genres, tracks,
-    albums;
+    let bio, events, artistName, avatar, genres, tracks = "",
+    albums = "";
 
     const spotifyOptions = function (url, token) {
         let options = {
@@ -52,7 +50,6 @@ router.get('/:id/:artist', function (req, res) {
                         //ARTIST INFO
                         let artistInfoOptions = spotifyOptions(id, token);
                         request.get(artistInfoOptions, function (error, response, body) {
-                            console.log(error);
                             artistName = `<h4>${body.name}</h4>`;
                             genres = `<ul>
                                 ${body.genres[0] ? `<li>${body.genres[0]}</li>` : ``}
@@ -77,47 +74,44 @@ router.get('/:id/:artist', function (req, res) {
                     }
                 });
             },
-            // (callback) => {
-            //     request.post(authOptions, function (error, response, body) {
-            //         if (!error && response.statusCode === 200) {
+            (callback) => {
+                request.post(authOptions, function (error, response, body) {
+                    if (!error && response.statusCode === 200) {
 
-            //             // use the access token to access the Spotify Web API
-            //             let token = body.access_token;
-                       
-            //             // TOP TRACKS
-            //             let topTrackOptions = spotifyOptions((id + '/top-tracks?country=US'), token);
-            //             request.get(topTrackOptions, function (error, response, body) {
-            //                 console.log(error);
-            //                 for (let i = 0; i < 5; i++) {
-            //                     let uri = body.tracks[i].uri;
+                        // use the access token to access the Spotify Web API
+                        let token = body.access_token;
+                        // TOP TRACKS
+                        let topTrackOptions = spotifyOptions((id + '/top-tracks?country=US'), token);
+                        request.get(topTrackOptions, function (error, response, body) {
+                            for (let i = 0; i < body.tracks.length; i++) {
+                                let uri = body.tracks[i].uri;
+                                tracks += `<iframe src="https://open.spotify.com/embed?uri=${uri}" width="100%" height="80" frameborder="0" allowtransparency="true" id="iframe"></iframe>`;
+                            }
+                            callback();
+                        });
+                    }
+                });
+            },
+            (callback) => {
+                request.post(authOptions, function (error, response, body) {
+                    if (!error && response.statusCode === 200) {
 
-            //                     tracks += `<iframe src="https://open.spotify.com/embed?uri=${uri}" width="100%" height="80" frameborder="0" allowtransparency="true" id="iframe"></iframe>`;
-            //                 }
-            //                 callback();
-            //             });
-            //         }
-            //     });
-            // },
-            // (callback) => {
-            //     request.post(authOptions, function (error, response, body) {
-            //         if (!error && response.statusCode === 200) {
+                        // use the access token to access the Spotify Web API
+                        let token = body.access_token;
+                        // ARTIST ALBUMS
+                        let artistAlbumOptions = spotifyOptions((id + '/albums?market=US'), token);
+                        request.get(artistAlbumOptions, function (error, response, body) {
 
-            //             // use the access token to access the Spotify Web API
-            //             let token = body.access_token;
-            //             // ARTIST ALBUMS
-            //             let artistAlbumOptions = spotifyOptions((id + '/albums?market=US'), token);
-            //             request.get(artistAlbumOptions, function (error, response, body) {
-            //                 console.log(error);
-            //                 for (let i = 0; i < 5; i++) {
-            //                     let albumURI = body.items[i].uri;
+                            for (let i = 0; i < body.items.length; i++) {
+                                let albumURI = body.items[i].uri;
 
-            //                     albums += `<iframe src="https://open.spotify.com/embed?uri=${albumURI}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>`;
-            //                 }
-            //                 callback();
-            //             });
-            //         }
-            //     });
-            // },
+                                albums += `<iframe src="https://open.spotify.com/embed?uri=${albumURI}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>`;
+                            }
+                            callback();
+                        });
+                    }
+                });
+            },
             (callback) => {
                 // BIO
                 let bioOptions = {
