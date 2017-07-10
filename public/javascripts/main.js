@@ -29,13 +29,6 @@ function bandstalker() {
     this.searchIcon.on('click', this.showSearch.bind(this));
     this.overlaySearchInput.on('keydown', _.debounce(this.search.bind(this), 200));
     this.overlaySearchClose.on('click', this.closeSearch.bind(this));
-    this.document.on('click', '.search-results', this.clearMarkers.bind(this));
-    this.document.on('click', '.search-results', this.artistInfo.bind(this));
-    this.document.on('click', '.search-results', this.artistBio.bind(this));
-    this.document.on('click', '.search-results', this.artistTracks.bind(this));
-    this.document.on('click', '.search-results', this.artistEvents.bind(this));
-    this.document.on('click', '.search-results', this.artistAlbums.bind(this));
-    this.document.on('click', '.search-results', this.closeSearch.bind(this));
     this.toggleButton.on('click', this.toggleInfo.bind(this));
 }
 
@@ -60,123 +53,43 @@ bandstalker.prototype.search = function () {
     let artist = this.overlaySearchInput.val().trim();
     $.ajax({
         method: 'POST',
-        url: `/artist?q=${artist}`,
+        url: `/search/${artist}`,
     }).then(function (html) {
         $this.overlaySearchResults.html(html);   
     });
 };
 
-bandstalker.prototype.artistBio = function (e) {
-    e.preventDefault();
+bandstalker.prototype.populateEvents = function (data) {
     let $this = this;
-    let artist = e.target.text;
-    let id = $(e.target).attr('artistid');
-    $.ajax({
-        method: 'POST',
-        url: `/artist/${id}/bio?q=${artist}`
-    }).then(function(html) {
-        $this.bio.html(html);
-    });
-};
+    console.log(data);
+    let image = {
+        url: '/images/placeholder.png',
+        size: new google.maps.Size(48, 48),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(24, 48)
+    }
 
-bandstalker.prototype.artistInfo = function (e) {
-    e.preventDefault
-    let $this = this;
-    let id = $(e.target).attr('artistid');
-    $.ajax({
-        method: 'POST',
-        url: `/artist/${id}`
-    }).then(function(data) {
+    for (let index = 0; index < data.length; index++) {
+        let element = data[index];
+
+        let latLng = new google.maps.LatLng(element.lat, element.lng);
+        let marker = new google.maps.Marker({
+            map: map,
+            position: latLng,
+            icon: image,
+            title: element.venue,
+            eventContent: element.info
+        });
         
-        let html = `
-            <h4>${data.name}</h4>
-            <ul>
-                ${data.genres[0] ? `<li>${data.genres[0]}</li>` : ``}
-                ${data.genres[1] ? `<li>${data.genres[1]}</li>` : ``}
-                ${data.genres[2] ? `<li>${data.genres[2]}</li>` : ``}
-            </ul>`;
-        $('#artist-name').html(html);
+        google.maps.event.addListener(marker, 'click', function() {
+            console.log($this.infowindow.getPosition());
+            map.setCenter(this.getPosition());
+            $this.infowindow.setContent(this.eventContent);
+            $this.infowindow.open(map, this);
+        })
 
-        if (data.images.length >= 3) {
-            let imgURL = data.images[2].url;
-            let avatar = `<img src="${imgURL}" alt="" id="avatar" class="responsive-img">`;
-            $("#artist-image").html(avatar);
-        } else if (data.images.length >= 2) {
-            let imgURL = data.images[1].url;
-            let avatar = `<img src="${imgURL}" alt="" id="avatar" class="responsive-img">`;
-            $("#artist-image").html(avatar);
-        } else if (data.images.length >= 1) {
-            let imgURL = data.images[0].url;
-            let avatar = `<img src="${imgURL}" alt="" id="avatar" class="responsive-img">`;
-            $("#artist-image").html(avatar);
-        } else if (data.images.length == 0) {
-            let avatar = `<i class="fa fa-user-circle" aria-hidden="true"></i>`
-            $("artist-image").html(avatar);
-        }
-    })
-};
-
-bandstalker.prototype.artistTracks = function (e) {
-    let $this = this;
-    let id = $(e.target).attr('artistid');
-    $.ajax({
-        method: 'POST',
-        url: `/artist/${id}/tracks`
-    }).then(function(html) {
-        $this.tracks.html(html);
-    });
-}
-
-bandstalker.prototype.artistAlbums = function (e) {
-    let $this = this;
-    let id = $(e.target).attr('artistid');
-    $.ajax({
-        method: 'POST',
-        url: `/artist/${id}/albums`
-    }).then(function(data) {
-        $this.albums.html(data);
-    });
-}
-
-bandstalker.prototype.artistEvents = function (e) {
-    let $this = this;
-    let artist = e.target.text;
-    let id = $(e.target).attr('artistid');
-    $.ajax({
-        method: 'POST',
-        url: `/artist/${id}/events?q=${artist}`
-    }).then(function(data) {
-
-        let image = {
-            url: '../images/placeholder.png',
-            size: new google.maps.Size(48, 48),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(24, 48)
-        }
-
-        for (let index = 0; index < data.events.length; index++) {
-            let element = data.events[index];
-
-            let latLng = new google.maps.LatLng(element.lat, element.lng);
-            let marker = new google.maps.Marker({
-                map: map,
-                position: latLng,
-                icon: image,
-                title: element.venue,
-                eventContent: element.info
-            });
-            
-            google.maps.event.addListener(marker, 'click', function() {
-                console.log($this.infowindow.getPosition());
-                map.setCenter(this.getPosition());
-                $this.infowindow.setContent(this.eventContent);
-                $this.infowindow.open(map, this);
-            })
-
-            $this.eventMarkers.push(marker);
-        } 
-        $this.events.html(data.html)
-    });
+        $this.eventMarkers.push(marker);
+    } 
 };
 
 bandstalker.prototype.clearMarkers = function () {
@@ -191,5 +104,5 @@ bandstalker.prototype.clearMarkers = function () {
 
 $(document).ready(function () {
     window.bandstalker = new bandstalker();
+    window.bandstalker.populateEvents(eventData.eventsArray);
 });
-

@@ -5,7 +5,6 @@ const moment = require('moment');
 const async = require('async');
 
 router.get('/:id/:artist', function (req, res) {
-    console.log(req.url);
     const artist = req.params.artist;
     const id = req.params.id;
 
