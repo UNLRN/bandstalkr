@@ -104,5 +104,5 @@ bandstalker.prototype.clearMarkers = function () {
 
 $(document).ready(function () {
     window.bandstalker = new bandstalker();
-    window.bandstalker.populateEvents(eventData.eventsArray);
+    // window.bandstalker.populateEvents(eventData.eventsArray);
 });
