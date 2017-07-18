@@ -6,10 +6,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const index = require('./routes/index');
-const search = require('./routes/api/search');
-const artists = require('./routes/artists');
-
 let app = express();
 
 app.use(favicon(__dirname + '/public/images/favicon.png'));
@@ -26,9 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/search', search);
-app.use('/artists', artists);
+app.use(require('./controllers'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
