@@ -22,7 +22,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// controllers
 app.use(require('./controllers'));
+
+// models
+const models = require("./models");
+
+//Sync Database
+models.sequelize.sync().then(function(){
+console.log('Nice! Database looks fine')
+
+}).catch(function(err){
+console.log(err,"Something went wrong with the Database Update!")
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
