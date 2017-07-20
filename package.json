@@ -3,7 +3,8 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "gulp": "gulp --gulpfile gulpfile.js"
   },
   "dependencies": {
     "async": "^2.5.0",
@@ -31,7 +32,6 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-pug": "3.3.0",
     "gulp-sass": "^3.1.0",
-    "gulp-util": "^3.0.8",
-    "nodemon": "^1.11.0"
+    "gulp-util": "^3.0.8"
   }
 }

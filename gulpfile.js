@@ -7,7 +7,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const cssbeautify = require('gulp-cssbeautify');
 const nodemon = require('gulp-nodemon');
 
-gulp.task('styles', function () {
+gulp.task('sass', function () {
 	gulp.src('./public/stylesheets/sass/app.sass')
 	.pipe(sass())
 	.pipe(autoprefixer({
@@ -19,7 +19,7 @@ gulp.task('styles', function () {
 		autosemicolon: true
 	}))
 	.pipe(gulp.dest('./public/stylesheets/css'))
-	.pipe(browserSync.reload({stream: true}))
+	.pipe(reload({stream: true}))
 	.on('error', gutil.log);
 });
 
@@ -28,7 +28,7 @@ gulp.task('nodemon', function(done){
 
 	return nodemon({
 		script: './bin/www',
-		watch: ['./app.js']
+		ext: 'js pug'
 	}).on('start', function() {
 		if (!running) {
 			done();
@@ -52,9 +52,6 @@ gulp.task('browser-sync', ['nodemon'], function() {
 gulp.task('serve', ['browser-sync'], function() {
 	gulp.watch('./public/stylesheets/sass/**/*.*', ['styles']);
 	gulp.watch('./public/javascripts/**/*.*').on('change', reload);
-	gulp.watch('./routes/**/*.*').on('change', reload);
-	gulp.watch('./views/**/*.*').on('change', reload);
-	gulp.watch('./app.js').on('change', reload);
 });
 
-gulp.task('default', ['styles', 'serve']);
+gulp.task('default', ['sass', 'serve']);

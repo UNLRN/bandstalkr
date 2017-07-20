@@ -1,0 +1,9 @@
+node_modules/
+.gitignore
+.jshintrc
+gulpfile.js
+README.md
+.env.default
+.git/
+docker.compose.yml
+node.dockerfile
