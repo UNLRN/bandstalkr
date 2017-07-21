@@ -10,11 +10,18 @@ services:
       - .:/src
     networks:
       - nodeapp
+    links:
+      - mysql:db
 
   mysql:
     image: mysql
     networks:
       - nodeapp
+    environment:
+      - MYSQL_ROOT_PASSWORD: root
+      - MYSQL_USER: root
+      - MYSQL_DATABASE: bandstalkr
+      - MYSQL_PASSWORD: root
 
 networks:
   nodeapp:
