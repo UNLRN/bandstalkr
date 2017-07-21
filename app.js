@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('./controllers'));
 
 // models
-const models = require("./models");
+// const models = require("./models");
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -7,11 +7,18 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    console.log(req.body.username);
     
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+
     const db = require('../../db.js');
 
-    res.redirect('/');
+    db.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, password], function(error, results, fields) {
+        if (error) throw error;
+
+        res.redirect('/');
+    });
 });
 
 module.exports = router;
