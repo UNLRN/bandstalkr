@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-
   web:
     build:
       context: .
@@ -14,19 +13,19 @@ services:
     networks:
       - nodeapp
     links:
-      - mysql:db
+      - db
 
-  mysql:
+  db:
     image: mysql
     networks:
       - nodeapp
     volumes:
       - .:/src/db
     environment:
-      MYSQL_ROOT_PASSWORD: root  
-      MYSQL_DATABASE: bandstalkr  
-      MYSQL_USER: root  
-      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: "root"  
+      MYSQL_DATABASE: "bandstalkr"  
+      MYSQL_USER: "root"  
+      MYSQL_PASSWORD: "root"
 
 networks:
   nodeapp:
