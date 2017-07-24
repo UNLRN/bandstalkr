@@ -7,7 +7,6 @@ services:
       dockerfile: node.dockerfile
     ports:
       - "3000:3000"
-      - "3001:3001"
     volumes:
       - .:/src
     networks:
@@ -19,13 +18,13 @@ services:
     image: mysql
     networks:
       - nodeapp
-    volumes:
-      - .:/src/db
+    ports:
+      - "1337:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "root"  
-      MYSQL_DATABASE: "bandstalkr"  
-      MYSQL_USER: "root"  
-      MYSQL_PASSWORD: "root"
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bandstalkr 
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=root
 
 networks:
   nodeapp:
