@@ -1,9 +1,42 @@
 include layouts/layout.pug
 
 block headerscripts
+	meta(charset='UTF-8')
+	meta(name='viewport', content='width=device-width, initial-scale=1')
+	// CSS
+	link(rel='stylesheet', type='text/css', href='/stylesheets/css/app.css')
+	// Font Awesome
+	link(rel='stylesheet', href='/stylesheets/css/libs/font-awesome/css/font-awesome.min.css')
+	// Fonts
+	link(href='https://fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400', rel='stylesheet')
 
 block content
-    h1 Hello! World!
-    a(href="/artists/2ye2Wgw4gimLv2eAKyk1NB/Metallica") Metallica
+	nav.navbar
+		.nav-container
+			// Navbar Brand
+			a.navbar-brand(href='/') Bandstalker
+			// Search form
+			.form-inline.pull-right
+				#search-container
+					i.fa.fa-search(aria-hidden='true')
+					input#search(type='text', placeholder='Search')
+	div
+		.img-container
+	// Search Overlay
+	#overlay-search-container
+		.overlay-content
+			#overlay-search-header
+				span#overlay-search-text Search for an artist...
+				span#overlay-search-close
+					i.fa.fa-times(aria-hidden='true')
+			#overlay-search
+				input#overlay-search-input(type='text')
+			ul#overlay-search-results
 
 block footerscripts
+	// jQuery
+	script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+	// lodash
+	script(type='text/javascript', src='/javascripts/libs/lodash.custom.min.js')
+	// JavaScript
+	script(src='/javascripts/index.js')

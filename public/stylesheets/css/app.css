@@ -1200,6 +1200,7 @@ body {
     padding: 0;
     color: #FFFFFF;
     font-family: "Open Sans", sans-serif;
+    background-color: #222325;
 }
 
 h1,
@@ -1262,7 +1263,7 @@ a {
     width: auto;
     vertical-align: middle;
     line-height: 64px;
-    margin: 0 10px;
+    margin: 10px 10px;
 }
 
 .pull-right {
@@ -1297,10 +1298,6 @@ a {
     #search::placeholder {
         opacity: 0;
     }
-}
-
-#search-container {
-    position: relative;
 }
 
 .fa-search {
@@ -1596,19 +1593,8 @@ iframe {
     background-blend-mode: multiply;
     background-color: #ffb091;
     background-size: cover;
-    z-index: -1;
+    z-index: 1;
     overflow: hidden;
-}
-
-.img-container:before {
-    transform: rotate(-45deg) translate(20%, 170%) scale(3);
-    background: #202022;
-    content: '';
-    display: block;
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    z-index: 5;
 }
 
 .badge {
