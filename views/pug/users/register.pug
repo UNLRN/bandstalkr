@@ -7,13 +7,16 @@ block content
         form(method="post" action="/register")
             div.form-group
                 label(for="username") Username
-                input(type="text" name="username" placeholder="Pick a username")
+                input(type="text" name="username" placeholder="Pick a username" value=(username === undefined ? '' : username) maxlength="25" title="Username must be between 4-25 characters long." required)
             div.form-group
                 label(for="email") Email
-                input(type="text" name="email" placeholder="Placeholder@email.com")
+                input(type="email" name="email" placeholder="Placeholder@email.com" value=(email === undefined ? '' : email) required)
             div.form-group
                 label(for="password") Password
-                input(type="text" name="password" placeholder="Create a password")
+                input(type="text" name="password" placeholder="Create a password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$" maxlength="100" title="Password must be between 8 and 100 characters and include one lowercase character, one uppercase character, a number, and a special character." required)
+            div.form-group
+                label(for="passwordMatch") Password
+                input(type="text" name="passwordMatch" placeholder="Re-enter password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$" maxlength="100" title="Password must be between 8 and 100 characters and include one lowercase character, one uppercase character, a number, and a special character." required)
             button(type="submit") Submit
 
 block footerscripts
