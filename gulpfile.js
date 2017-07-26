@@ -28,6 +28,7 @@ gulp.task('nodemon', function(done){
 
 	return nodemon({
 		script: './bin/www',
+		exec: './node_modules/.bin/babel-node --presets es2015',
 		ext: 'js pug'
 	}).on('start', function() {
 		if (!running) {

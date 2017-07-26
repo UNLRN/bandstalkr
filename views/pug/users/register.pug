@@ -1,22 +1,24 @@
 include ../layouts/layout.pug
 
 block headerscripts
+	meta(charset='UTF-8')
+	meta(name='viewport', content='width=device-width, initial-scale=1')
+	// CSS
+	link(rel='stylesheet', type='text/css', href='/stylesheets/css/app.css')
 
 block content
-    .container
-        form(method="post" action="/register")
-            div.form-group
-                label(for="username") Username
-                input(type="text" name="username" placeholder="Pick a username" value=(username === undefined ? '' : username) maxlength="25" title="Username must be between 4-25 characters long." required)
-            div.form-group
-                label(for="email") Email
-                input(type="email" name="email" placeholder="Placeholder@email.com" value=(email === undefined ? '' : email) required)
-            div.form-group
-                label(for="password") Password
-                input(type="text" name="password" placeholder="Create a password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$" maxlength="100" title="Password must be between 8 and 100 characters and include one lowercase character, one uppercase character, a number, and a special character." required)
-            div.form-group
-                label(for="passwordMatch") Password
-                input(type="text" name="passwordMatch" placeholder="Re-enter password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$" maxlength="100" title="Password must be between 8 and 100 characters and include one lowercase character, one uppercase character, a number, and a special character." required)
-            button(type="submit") Submit
+	.container
+		.row
+			form(method="post" action="/register")
+				div.form-group
+					label(for="username") Username
+					input.form-control(type="text" name="username" placeholder="Pick a username" maxlength="25" value=(username === undefined ? '' : username) title="Username must be between 4-25 characters long." required)
+				div.form-group
+					label(for="email") Email
+					input.form-control(type="email" name="email" placeholder="Placeholder@email.com" value=(email === undefined ? '' : email) required)
+				div.form-group
+					label(for="password") Password
+					input.form-control(type="text" name="password" placeholder="Create a password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$" maxlength="100" title="Password must be between 8 and 100 characters and include one lowercase character, one uppercase character, a number, and a special character." required)
+				button(type="submit") Submit
 
 block footerscripts

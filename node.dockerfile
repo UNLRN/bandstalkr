@@ -2,8 +2,8 @@ FROM node:7.10.0
 
 MAINTAINER Matt Jiles
 
-WORKDIR /src/
-ADD package.json /src/
+# WORKDIR /src/
+# ADD package.json /src/
 
 # # RUN apt-get update -qq && apt-get install -y build-essential
 # # RUN apt-get install -y ruby-full rubygems

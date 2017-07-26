@@ -25,6 +25,8 @@ services:
       - MYSQL_DATABASE=bandstalkr 
       - MYSQL_USER=user
       - MYSQL_PASSWORD=root
+    volumes:
+      - ./data-volume:/var/lib/mysql
 
 networks:
   nodeapp:
