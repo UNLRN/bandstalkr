@@ -1,12 +1,15 @@
 const express = require('express');
 let router = express.Router();
 const expressValidator = require('express-validator');
+const passport = require('passport');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const db = require('../../db.js');
 
 /* GET home page. */
 router.get('/', function (req, res) {
+    console.log(req.user);
+    console.log(req.isAuthenticated());
     res.render('users/register');
 });
 
@@ -81,11 +84,27 @@ router.post('/', function (req, res) {
                     db.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, hash], function (error, results, fields) {
                         if (error) throw error;
 
-                        res.redirect('/');
+                        db.query('SELECT LAST_INSERT_ID() as user_id', function(error, results, fields) {
+                            if (error) throw error;
+
+                            const user_id = results[0];
+
+                            req.login(user_id, function(err){
+                                res.redirect('/');
+                            })
+                        })
                     });
                 });
             });
         })
+});
+
+passport.serializeUser(function(user_id, done) {
+  done(null, user_id);
+});
+
+passport.deserializeUser(function(user_id, done) {
+    done(null, user_id);
 });
 
 module.exports = router;

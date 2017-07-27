@@ -7,6 +7,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
+const session = require('express-session');
+const sqlstore = require('express-mysql-session')(session);
+const passport = require('passport');
+
 let app = express();
 
 app.use(favicon(__dirname + '/public/images/favicon.png'));
@@ -23,6 +27,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+const options = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+};
+
+const sessionStore = new sqlstore(options);
+
+app.use(session({
+  secret: 'jammies',
+  resave: false,
+  store: sessionStore,
+  saveUninitialized: false
+  // cookie: { secure: true }
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // controllers
 app.use(require('./controllers'));
