@@ -1,9 +1,17 @@
 const express = require('express');
-var router = express.Router();
+const router = express.Router();
+const passport = require('passport');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-  res.render('login');
+	res.render('login');
 });
+
+router.post('/', passport.authenticate(
+	'local', {
+		successRedirect: '/dashboard',
+		failureRedirect: '/login',
+	}
+));
 
 module.exports = router;
