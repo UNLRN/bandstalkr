@@ -1,11 +1,11 @@
-CREATE DATABASE `bandstalkr`;
+CREATE DATABASE `bandstalker`;
 
-USE DATABASE `bandstalkr`;
+USE `bandstalker`;
 
-CREATE TABLE `bandstalkr`.`users` (
+CREATE TABLE `bandstalker`.`users` (
   `id` INT(11) NOT NULL UNIQUE AUTO_INCREMENT,
   `username` VARCHAR(25) NOT NULL UNIQUE,
   `email` VARCHAR(100) NOT NULL UNIQUE,
   `password` BINARY(60) NOT NULL,
-  `active` BOOLEAN default 0,
+  `active` BOOLEAN default FALSE,
   PRIMARY KEY (`id`));
