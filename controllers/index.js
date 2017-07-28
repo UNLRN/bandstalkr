@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 router.use('/artists', require('./artists/artists'));
 router.use('/search', require('./artists/search'));
 

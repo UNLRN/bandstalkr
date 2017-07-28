@@ -11,7 +11,7 @@ const session = require('express-session');
 const SQLstore = require('express-mysql-session')(session);
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrype');
+const bcrypt = require('bcrypt');
 
 let app = express();
 
