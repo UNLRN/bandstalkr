@@ -1,70 +1,70 @@
 include layouts/layout.pug
 
 block headscripts
-	meta(charset='UTF-8')
-	meta(name='viewport', content='width=device-width, initial-scale=1')
-	// CSS
-	link(rel='stylesheet', type='text/css', href='/stylesheets/css/app.css')
-	// Font Awesome
-	link(rel='stylesheet', href='/stylesheets/css/libs/font-awesome/css/font-awesome.min.css')
-	// Fonts
-	link(href='https://fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400', rel='stylesheet')
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // CSS
+    link(rel='stylesheet', type='text/css', href='/stylesheets/css/app.css')
+    // Font Awesome
+    link(rel='stylesheet', href='/stylesheets/css/libs/font-awesome/css/font-awesome.min.css')
+    // Fonts
+    link(href='https://fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400', rel='stylesheet')
 block content
-	include layouts/includes/nav.pug
-	#main
-		#artist-header
-			#artist-image.img-wrapper.left!= avatar
-			#artist-name !{artistName} !{genres} 
-		.tabs-container
-			ul.tabs
-				li.col-xs-6.tab.current
-					img(src='../../images/bio.svg', alt='')
-					a(href='#bio')
-						span.visible Bio
-				li.col-xs-2.tab
-					img(src='../../images/tracks.svg', alt='')
-					a(href='#tracks')
-						span Top Tracks
-				li.col-xs-2.tab
-					img(src='../../images/albums.svg', alt='')
-					a(href='#albums')
-						span Albums
-				li.col-xs-2.tab
-					img(src='../../images/events.svg', alt='')
-					a(href='#events')
-						span Events
-		#artist-info
-			#bio.panels.visible!= bio
-			#tracks.panels !{tracks}
-			#albums.panels !{albums}
-			#events.panels
-				#event-container !{events.html}
+    include layouts/includes/nav.pug
+    #main
+        #artist-header
+            #artist-image.img-wrapper.left!= avatar
+            #artist-name !{artistName} !{genres} 
+        .tabs-container
+            ul.tabs
+                li.col-xs-6.tab.current
+                    img(src='../../images/bio.svg', alt='')
+                    a(href='#bio')
+                        span.visible Bio
+                li.col-xs-2.tab
+                    img(src='../../images/tracks.svg', alt='')
+                    a(href='#tracks')
+                        span Top Tracks
+                li.col-xs-2.tab
+                    img(src='../../images/albums.svg', alt='')
+                    a(href='#albums')
+                        span Albums
+                li.col-xs-2.tab
+                    img(src='../../images/events.svg', alt='')
+                    a(href='#events')
+                        span Events
+        #artist-info
+            #bio.panels.visible!= bio
+            #tracks.panels !{tracks}
+            #albums.panels !{albums}
+            #events.panels
+                #event-container !{events.html}
 
-	// Main Toggle Button
-	.artist-toggle
-		button.toggle-button
-			span View Artist Info
-	// Map Content
-	#map-container
-		#map
-	// Search Overlay
-	#overlay-search-container
-		.overlay-content
-			#overlay-search-header
-				span#overlay-search-text Search
-				span#overlay-search-close
-					i.fa.fa-times(aria-hidden='true')
-			#overlay-search
-				input#overlay-search-input(type='text')
-			ul#overlay-search-results
+    // Main Toggle Button
+    .artist-toggle
+        button.toggle-button
+            span View Artist Info
+    // Map Content
+    #map-container
+        #map
+    // Search Overlay
+    #overlay-search-container
+        .overlay-content
+            #overlay-search-header
+                span#overlay-search-text Search
+                span#overlay-search-close
+                    i.fa.fa-times(aria-hidden='true')
+            #overlay-search
+                input#overlay-search-input(type='text')
+            ul#overlay-search-results
 block footerscripts
-	// Google Maps
-	script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCKiV0NAdFYgjEssNO-8Dtk0BXCex91eA8')
-	// jQuery
-	script(src='https://code.jquery.com/jquery-3.2.1.min.js')
-	// lodash
-	script(type='text/javascript', src='/javascripts/libs/lodash.custom.min.js')
-	// JavaScript
-	script(src='/javascripts/map.js')
-	script(src='/javascripts/tabs.js')
-	script(src='/javascripts/main.js')
+    // jQuery
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+    // lodash
+    script(type='text/javascript', src='/javascripts/libs/lodash.custom.min.js')
+    // JavaScript
+    script(src='/javascripts/main.js')
+    script(src='/javascripts/tabs.js')
+    // Google Maps
+    script(src='/javascripts/map.js')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCKiV0NAdFYgjEssNO-8Dtk0BXCex91eA8&callback=initialize' async defer)

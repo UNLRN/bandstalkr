@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const request = require('request');
+const moment = require('moment');
 
-router.post('/', function (req, res) {
+router.post('/:artist', function (req, res) {
 
-	const artist = req.query.artist;
+    const artist = req.params.artist;
+    console.log(artist);
 	// EVENTS
 	let eventOptions = {
 		url: 'https://rest.bandsintown.com/artists/' + artist + '/events?app_id=bootcamp',
@@ -11,7 +14,7 @@ router.post('/', function (req, res) {
 	};
 	request.get(eventOptions, function (error, response, body) {
 		let eventsArray = [];
-		let html = "";
+
 		for (let index = 0; index < body.length; index++) {
 			let date = moment(body[index].datetime);
 			let element = body[index].venue;
@@ -42,11 +45,11 @@ router.post('/', function (req, res) {
 				venue: venue,
 				lat: latitude,
 				lng: longitude,
-				info: info
+				info: info,
 			});
+        }
+        res.send(eventsArray);
+	});
+});
 
-			res.send(eventsArray);
-		}
-	})
-	
-})
+module.exports = router;

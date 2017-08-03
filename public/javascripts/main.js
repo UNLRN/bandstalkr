@@ -3,13 +3,10 @@
 function bandstalker() {
 
     this.eventMarkers = [];
-    this.infowindow = new google.maps.InfoWindow({
-        maxWidth: 200
-    });
 
     this.document = $(document);
 
-	this.artist = $('#artist-name > h4').text();
+    this.artist = $('#artist-name > h4').text();
 
     this.searchInput = $('#search');
     this.searchIcon = $('.fa-search');
@@ -57,46 +54,46 @@ bandstalker.prototype.search = function () {
         method: 'POST',
         url: `/search/${artist}`,
     }).then(function (html) {
-        $this.overlaySearchResults.html(html);   
+        $this.overlaySearchResults.html(html);
     });
 };
 
-bandstalker.prototype.populateEvents = function (artist) {
-	let $this = this;
-	$.ajax({
-		method: 'POST',
-		url: `/events?artist=artist`
-	})
-    console.log(data);
-    let image = {
-        url: '/images/placeholder.png',
-        size: new google.maps.Size(48, 48),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(24, 48)
-    }
+// bandstalker.prototype.populateEvents = function (artist) {
+//     let $this = this;
+//     $.ajax({
+//         method: 'POST',
+//         url: `/events/${artist}`,
+//     }).then(function (data) {
+//         let image = {
+//             url: '/images/placeholder.png',
+//             size: new google.maps.Size(48, 48),
+//             origin: new google.maps.Point(0, 0),
+//             anchor: new google.maps.Point(24, 48)
+//         }
 
-    for (let index = 0; index < data.length; index++) {
-        let element = data[index];
+//         for (let index = 0; index < data.length; index++) {
+//             let element = data[index];
 
-        let latLng = new google.maps.LatLng(element.lat, element.lng);
-        let marker = new google.maps.Marker({
-            map: map,
-            position: latLng,
-            icon: image,
-            title: element.venue,
-            eventContent: element.info
-        });
-        
-        google.maps.event.addListener(marker, 'click', function() {
-            console.log($this.infowindow.getPosition());
-            map.setCenter(this.getPosition());
-            $this.infowindow.setContent(this.eventContent);
-            $this.infowindow.open(map, this);
-        })
+//             let latLng = new google.maps.LatLng(element.lat, element.lng);
+//             let marker = new google.maps.Marker({
+//                 map: map,
+//                 position: latLng,
+//                 icon: image,
+//                 title: element.venue,
+//                 eventContent: element.info
+//             });
 
-        $this.eventMarkers.push(marker);
-    } 
-};
+//             google.maps.event.addListener(marker, 'click', function () {
+//                 console.log($this.infowindow.getPosition());
+//                 map.setCenter(this.getPosition());
+//                 $this.infowindow.setContent(this.eventContent);
+//                 $this.infowindow.open(map, this);
+//             })
+
+//             $this.eventMarkers.push(marker);
+//         }
+//     });
+// };
 
 bandstalker.prototype.clearMarkers = function () {
     let $this = this;
@@ -109,6 +106,6 @@ bandstalker.prototype.clearMarkers = function () {
 };
 
 $(document).ready(function () {
-	window.bandstalker = new bandstalker();
-    window.bandstalker.populateEvents(window.bandstalker.artist);
+    window.bandstalker = new bandstalker();
+    // window.bandstalker.populateEvents(window.bandstalker.artist);
 });

@@ -3,6 +3,7 @@ const router = express.Router();
 
 
 router.use('/artists', require('./artists/artists'));
+router.use('/events', require('./artists/events'));
 router.use('/search', require('./artists/search'));
 
 router.use('/dashboard', require('./users/dashboard'));
