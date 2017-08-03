@@ -9,16 +9,8 @@ block headscripts
 	link(rel='stylesheet', href='/stylesheets/css/libs/font-awesome/css/font-awesome.min.css')
 	// Fonts
 	link(href='https://fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400', rel='stylesheet')
-block content		
-	nav.navbar
-		.nav-container
-			// Navbar Brand
-			a.navbar-brand(href='/') Bandstalker
-			// Search form
-			.form-inline.pull-right
-				#search-container
-					i.fa.fa-search(aria-hidden='true')
-					input#search(type='text', placeholder='Search')
+block content
+	include layouts/includes/nav.pug
 	#main
 		#artist-header
 			#artist-image.img-wrapper.left!= avatar

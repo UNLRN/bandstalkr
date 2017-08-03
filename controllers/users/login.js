@@ -4,7 +4,7 @@ const passport = require('passport');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-	res.render('login');
+	res.render('users/login');
 });
 
 router.post('/', passport.authenticate(

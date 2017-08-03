@@ -1,21 +1,20 @@
 include ../layouts/layout.pug
 
 block headerscripts
-	meta(charset='UTF-8')
-	meta(name='viewport', content='width=device-width, initial-scale=1')
-	// CSS
-	link(rel='stylesheet', type='text/css', href='/stylesheets/css/app.css')
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // CSS
+    link(rel='stylesheet', type='text/css', href='/stylesheets/css/app.css')
 
 block content
-	.container
-		.row
-			form(method="post" action="/login")
-				div.form-group
-					label(for="username") Username
-					input.form-control(type="text" name="username" placeholder="Enter your username" maxlength="25" required)
-				div.form-group
-					label(for="password") Password
-					input.form-control(type="text" name="password" placeholder="Enter your password" maxlength="100"  required)
-				button(type="submit") Submit
+    .login-container
+        form.login(method="post" action="/login")
+            div.form-group
+                label.input-label(for="username") Username
+                input(type="text" name="username" placeholder="Enter your username" maxlength="25" required)
+            div.form-group
+                label.input-label(for="password") Password
+                input(type="text" name="password" placeholder="Enter your password" maxlength="100"  required)
+            button(type="submit") Submit
 
 block footerscripts

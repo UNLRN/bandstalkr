@@ -11,15 +11,7 @@ block headerscripts
 	link(href='https://fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400', rel='stylesheet')
 
 block content
-	nav.navbar
-		.nav-container
-			// Navbar Brand
-			a.navbar-brand(href='/') Bandstalker
-			// Search form
-			.form-inline.pull-right
-				#search-container
-					i.fa.fa-search(aria-hidden='true')
-					input#search(type='text', placeholder='Search')
+	include layouts/includes/nav.pug
 	div
 		.img-container
 	// Search Overlay

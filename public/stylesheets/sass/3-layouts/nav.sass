@@ -1,4 +1,4 @@
-.navbar 
+.navbar
     top: 0
     right: 0
     left: 0
@@ -8,9 +8,8 @@
     background-color: $black
     border-bottom: 1px solid lighten($black, 5%)
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)
-    
 
-.navbar-brand 
+.navbar-brand
     position: relative
     float: left
     line-height: 64px
@@ -24,15 +23,17 @@
 
 .navbar-login
     margin: 0 20px
+    vertical-align: middle
+    line-height: 64px
 
-.form-inline 
+.form-inline
     display: inline-block
     width: auto
     vertical-align: middle
     line-height: 64px
     margin: 10px 10px
 
-.pull-right 
+.pull-right
     float: right !important
 
 #search
@@ -43,10 +44,12 @@
     outline: none
     border: none
     box-sizing: border-box
-    @media(max-width: 520px) 
+
+    @media(max-width: 520px)
         cursor: pointer
         padding: 0
         width: 45px
+
         &::placeholder
             opacity: 0
 
@@ -55,12 +58,13 @@
     left: 35px
     line-height: 45px
     color: darken($white, 50%)
-    @media(max-width: 520px) 
+
+    @media(max-width: 520px)
         left: 50%
         cursor: pointer
 
-/*overlay search*/
-#overlay-search-container 
+/*overlay search
+#overlay-search-container
     position: fixed
     left: 0
     top: 0
@@ -69,10 +73,9 @@
     z-index: 9999
     background-color: rgba(0, 0, 0, 0.9)
     overflow: auto
-    transform: scale(0)    
+    transform: scale(0)
 
-
-.overlay-content 
+.overlay-content
     position: relative
     height: 100vh
     width: 60%
@@ -80,29 +83,24 @@
     padding-top: 100px
     background-color: rgba(0, 0, 0, 0.01)
 
-
-#overlay-search-header 
+#overlay-search-header
     color: #fff
     width: 80%
     height: 25px
     margin: 0 auto
 
-
-#overlay-search-text 
+#overlay-search-text
     float: left
     text-transform: uppercase
 
-
-#overlay-search-close 
+#overlay-search-close
     float: right
     cursor: pointer
 
-
-#overlay-search 
+#overlay-search
     clear: both
     width: 80%
     margin: 10px auto
-
 
 #overlay-search-input
     width: 100%
@@ -114,34 +112,31 @@
     box-sizing: border-box
     padding-left: 10px
     background-color: rgba(0, 0, 0, 0.01)
+
     &:focus
         border-bottom: 1px solid $orange
-        box-shadow: 0 1px 0 0 darken($orange, 15%)  
+        box-shadow: 0 1px 0 0 darken($orange, 15%)
 
-#overlay-search-results 
+#overlay-search-results
     width: 80%
     margin: 10px auto
     padding: 0
     padding-left: 20px
     list-style: none
 
-
 #overlay-search-results
-    li 
+    li
         margin: 0 0 20px
 
-
 #overlay-search-results
-    a 
+    a
         color: #888
         font-size: 24px
         line-height: 24px
         text-decoration: none
 
-
 #overlay-search-results
-    a:hover 
+    a:hover
         color: #fff
         text-decoration: underline
         cursor: pointer
-

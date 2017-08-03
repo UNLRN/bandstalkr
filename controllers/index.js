@@ -6,7 +6,7 @@ router.use('/artists', require('./artists/artists'));
 router.use('/search', require('./artists/search'));
 
 router.use('/dashboard', require('./users/dashboard'));
-router.use('/register', require('./users/register'));
+router.use('/register', require('./users/signup'));
 router.use('/login', require('./users/login'));
 router.use('/logout', require('./users/logout'));
 
