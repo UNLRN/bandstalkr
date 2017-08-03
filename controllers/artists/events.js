@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.post('/', function (req, res) {
 
-	const artist = req.query.artist
+	const artist = req.query.artist;
 	// EVENTS
 	let eventOptions = {
 		url: 'https://rest.bandsintown.com/artists/' + artist + '/events?app_id=bootcamp',

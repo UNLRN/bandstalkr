@@ -108,12 +108,7 @@ bandstalker.prototype.clearMarkers = function () {
     $this.eventMarkers = [];
 };
 
-bandstalker.prototype.logArtist = function() {
-	console.log(this.artist);
-}
-
 $(document).ready(function () {
 	window.bandstalker = new bandstalker();
-	window.bandstalker.logArtist();
-    // window.bandstalker.populateEvents(eventData.eventsArray);
+    window.bandstalker.populateEvents(window.bandstalker.artist);
 });
