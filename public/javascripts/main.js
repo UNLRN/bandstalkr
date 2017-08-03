@@ -9,6 +9,8 @@ function bandstalker() {
 
     this.document = $(document);
 
+	this.artist = $('#artist-name > h4').text();
+
     this.searchInput = $('#search');
     this.searchIcon = $('.fa-search');
 
@@ -59,8 +61,12 @@ bandstalker.prototype.search = function () {
     });
 };
 
-bandstalker.prototype.populateEvents = function (data) {
-    let $this = this;
+bandstalker.prototype.populateEvents = function (artist) {
+	let $this = this;
+	$.ajax({
+		method: 'POST',
+		url: `/events?artist=artist`
+	})
     console.log(data);
     let image = {
         url: '/images/placeholder.png',
@@ -102,7 +108,12 @@ bandstalker.prototype.clearMarkers = function () {
     $this.eventMarkers = [];
 };
 
+bandstalker.prototype.logArtist = function() {
+	console.log(this.artist);
+}
+
 $(document).ready(function () {
-    window.bandstalker = new bandstalker();
+	window.bandstalker = new bandstalker();
+	window.bandstalker.logArtist();
     // window.bandstalker.populateEvents(eventData.eventsArray);
 });
