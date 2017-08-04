@@ -2652,18 +2652,44 @@ iframe {
     margin: 5px;
 }
 
-.login-container {
-    border-radius: 5px;
-    margin: 0 auto;
-    vertical-align: middle;
-    padding: 50px;
-    width: 15%;
-    background-color: #222325;
+input[type="text"], input[type="email"] {
+    background: #2C2C2F;
+    margin: 10px 0;
+    padding: 10px;
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border: none;
 }
 
-.login {
-    margin: 0 auto;
+button {
+    background-color: #2C2C2F;
+    color: #fff;
+    margin: 10px auto;
+    height: 45px;
     width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-group {
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+}
+
+.input-label {
+    display: block;
+}
+
+.login-container {
+    background-color: #222325;
+    margin: 50px auto;
+    padding: 50px;
+    border-radius: 5px;
+    width: 340px;
 }
 
 #map-container {
@@ -2860,6 +2886,14 @@ iframe {
     color: #fff;
     text-decoration: underline;
     cursor: pointer;
+}
+
+.register-container {
+    background-color: #222325;
+    margin: 50px auto;
+    padding: 50px;
+    border-radius: 5px;
+    width: 340px;
 }
 
 .img-container {
