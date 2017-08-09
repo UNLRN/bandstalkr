@@ -2762,6 +2762,7 @@ button {
     height: 45px;
     width: 150px;
     padding: 0 40px;
+    margin: 10px;
     outline: none;
     border: none;
     box-sizing: border-box;
